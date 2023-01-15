@@ -1,5 +1,5 @@
 # CodeCave-Hunter
-automates finding code caves for a given module
+automates finding code caves for a given module in WinDbg using PYKD lib
 
 
 USAGE:
