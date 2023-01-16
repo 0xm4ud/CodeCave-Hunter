@@ -4,4 +4,4 @@ automates finding code caves and .data section for a given module in WinDbg usin
 
 USAGE:
 ```
-!py c:\tools\cavz.py vulnApp
+!py c:\tools\cchunter.py vulnApp
