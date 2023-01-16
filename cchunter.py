@@ -2,10 +2,15 @@ import pykd
 import sys
 import re
 
-print("\r\nM4UD's Code Cave and .data section hunter!\r\n")
+print("\r\nM4UD's CodeCave hunter!\r\n")
+
 module_name = ""
 if len(sys.argv) > 1:
     module_name = sys.argv[1]
+
+print("\r\n=============================================")
+print(f"Hunting for Code Cave on module {module_name}...")
+print("=============================================\r\n")
 
 output = pykd.dbgCommand(f"dd {module_name} + 3C L1")
 parts = output.split()
@@ -26,6 +31,7 @@ for line in output.split("\n"):
         var4 = int(line.split()[-1], 16)
     if "Protect:" in line:
         var5 = line.split()[-1]
+
 
 print(f"End Address: 0x{var4:x}")
 print(f"Protect: {var5}")
@@ -70,6 +76,7 @@ print("virtual address = "+var4)
 
 output = pykd.dbgCommand(f"? {module_name} + {var3} + {var4}")
 
+
 var5 = re.search(r'=\s+([\w]+)',output).group(1)
 print("SECTION HEADER .data located at = "+var5)
 
@@ -80,7 +87,6 @@ if protect == "00000004":
 	print("Protect: "+protect +"  PAGE_READWRITE")
 else:
 	print("NOT PAGE_READWRITE, something is off!")
-    quit()
 
 output = pykd.dbgCommand(f"?{var5} - {module_name}")
 match = re.search(r': (.*) =', output)
