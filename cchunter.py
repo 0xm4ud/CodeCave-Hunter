@@ -126,3 +126,4 @@ if len(sys.argv) == 3:
         print(f"wpm += pack(\"<L\", (0x{end_address:x})) # dummy lpBaseAddress - CODE CAVE")
         print(f"wpm += pack(\"<L\", (0x45454545)) # dummy lpBuffer")
         print(f"wpm += pack(\"<L\", (0x46464646)) # dummy nSize")
+	print(f"wpm += pack(\"<L\", (0x{var5})) # dummy *lpNumberOfBytesWritten - .data")
