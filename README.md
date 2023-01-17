@@ -1,5 +1,5 @@
 # CodeCave-Hunter
-automates finding code caves, .data section and can retrieve an Win32 API from a given module IAT in WinDbg using PYKD lib
+automates finding code caves, .data section and can retrieve an Win32 API addr from a given module IAT in WinDbg using PYKD lib
 
 
 USAGE:
