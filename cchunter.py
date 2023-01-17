@@ -109,7 +109,7 @@ match = re.search(r': (.*) =', output)
 value = match.group(1)
 print("Offset to writable .data section is: "+ hex(int(value)))
 
-if len(sys.argv) == 3 and sys.argv[2] == "WriteProcessMemory":
+if len(sys.argv) == 3:
     print("\r\n========================================================")
     print(f"Retriving {Win32_API} addr from {module_name} IAT...")
     print("========================================================\r\n")
@@ -118,10 +118,11 @@ if len(sys.argv) == 3 and sys.argv[2] == "WriteProcessMemory":
     print(api[-1]+"\r\n")
     api = re.search(r'(?m)^\d+',api[-1], re.IGNORECASE).group()
 
-    print(f"Win32 {Win32_API} API call Skelleton\r\n")
-    print(f"wpm = pack(\"<L\", (0x{api})) # {Win32_API} addr")
-    print(f"wpm += pack(\"<L\", (0x{end_address:x})) # CODE CAVE- Shellcode Return Address")
-    print(f"wpm += pack(\"<L\", (0xffffffff)) # dummy hProcess - 0xfffffffff")
-    print(f"wpm += pack(\"<L\", (0x{end_address:x})) # dummy lpBaseAddress - CODE CAVE")
-    print(f"wpm += pack(\"<L\", (0x45454545)) # dummy lpBuffer")
-    print(f"wpm += pack(\"<L\", (0x46464646)) # dummy nSize")
+    if sys.argv[2] == "WriteProcessMemory":
+        print(f"Win32 {Win32_API} API call Skelleton\r\n")
+        print(f"wpm = pack(\"<L\", (0x{api})) # {Win32_API} addr")
+        print(f"wpm += pack(\"<L\", (0x{end_address:x})) # CODE CAVE- Shellcode Return Address")
+        print(f"wpm += pack(\"<L\", (0xffffffff)) # dummy hProcess - 0xfffffffff")
+        print(f"wpm += pack(\"<L\", (0x{end_address:x})) # dummy lpBaseAddress - CODE CAVE")
+        print(f"wpm += pack(\"<L\", (0x45454545)) # dummy lpBuffer")
+        print(f"wpm += pack(\"<L\", (0x46464646)) # dummy nSize")
