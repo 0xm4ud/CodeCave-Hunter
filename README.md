@@ -5,3 +5,5 @@ automates finding code caves, .data section and can retrieve an Win32 API from a
 USAGE:
 ```
 !py c:\tools\cchunter.py vulnApp
+
+!py c:\tools\cchunter.py vulnApp WriteProcessMemory
