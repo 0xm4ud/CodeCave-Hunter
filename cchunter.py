@@ -1,4 +1,4 @@
-# ( M4UD's Code Cave Hunter! )
+# (M4UD's) Code Caver Hunter ##
 
 import pykd
 import sys
@@ -116,14 +116,15 @@ if len(sys.argv) == 3:
     output2 = pykd.dbgCommand(f"$$>a<c:\\tools\osed-scripts\Find-IAT.txt {module_name}")
     api = re.findall(r"[^\n]*{}[^\n]*".format(Win32_API), str(output2), re.MULTILINE)
     print(api[-1]+"\r\n")
-    api = re.search(r'(?m)^\d+',api[-1], re.IGNORECASE).group()
+    api = re.search(r"(\s\w+\b)", api[0], re.IGNORECASE).group(1)
 
     if sys.argv[2] == "WriteProcessMemory":
         print(f"Win32 {Win32_API} API call Skelleton\r\n")
-        print(f"wpm = pack(\"<L\", (0x{api})) # {Win32_API} addr")
+        print(f"wpm = pack(\"<L\", (0x{api[1:9]})) # {Win32_API} addr")
         print(f"wpm += pack(\"<L\", (0x{end_address:x})) # CODE CAVE- Shellcode Return Address")
         print(f"wpm += pack(\"<L\", (0xffffffff)) # dummy hProcess - 0xfffffffff")
         print(f"wpm += pack(\"<L\", (0x{end_address:x})) # dummy lpBaseAddress - CODE CAVE")
         print(f"wpm += pack(\"<L\", (0x45454545)) # dummy lpBuffer")
         print(f"wpm += pack(\"<L\", (0x46464646)) # dummy nSize")
-	print(f"wpm += pack(\"<L\", (0x{var5})) # dummy *lpNumberOfBytesWritten - .data")
+        print(f"wpm += pack(\"<L\", (0x{var5})) # dummy *lpNumberOfBytesWritten - .data")
+	
